@@ -1,12 +1,12 @@
 import React from 'react'
-import { NativeBaseProvider, Button, Text } from 'native-base'
+import { NativeBaseProvider, Box, Button } from 'native-base'
 
 const App = () => (
   <NativeBaseProvider>
-    <Button size="md" width={20} colorScheme="darkBlue" variant="solid">
-      Button
+    <Box width="100%" padding={4} bg="primary" height="auto" minHeight="50px" />
+    <Button size="md" width={20} colorScheme="primary" variant="solid">
+      Buttonss
     </Button>
-    <Text>Write Here</Text>
   </NativeBaseProvider>
 )
 
