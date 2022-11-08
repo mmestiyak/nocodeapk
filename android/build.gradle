@@ -1,6 +1,5 @@
 buildscript {
     ext {
-<<<<<<< HEAD
         buildToolsVersion = "31.0.0"
         minSdkVersion = 24
         compileSdkVersion = 31
@@ -17,20 +16,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.0.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-=======
-        buildToolsVersion = "29.0.3"
-        minSdkVersion = 21
-        compileSdkVersion = 31
-        targetSdkVersion = 31
-        ndkVersion = "24.0.8215888"
-    }
-    repositories {
-        mavenCentral()
-        google()    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:4.1.0")
-        classpath 'com.google.gms:google-services:4.3.10'
->>>>>>> 21bd96f898a8a23badbbcb59ce1723265b5e517f
     }
 }
 
@@ -48,7 +33,6 @@ allprojects {
         }
 
         google()
-<<<<<<< HEAD
         mavenCentral {
             content {
                 excludeGroup("com.facebook.react")
@@ -66,10 +50,3 @@ allprojects {
         }
     }
 }
-=======
-        // jcenter() <- comment this one
-        gradlePluginPortal() // <- and replace it for this one
-        maven { url 'https://www.jitpack.io' }
-    }
-}
->>>>>>> 21bd96f898a8a23badbbcb59ce1723265b5e517f
