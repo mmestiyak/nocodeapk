@@ -1,14 +1,36 @@
-import React from 'react'
-import { NativeBaseProvider, Box, Button } from 'native-base'
+import React from 'react';
+import {NativeBaseProvider, Box, Button} from 'native-base';
+import useBLE from './src/components/hooks/useBLE';
+import Screen1 from './src/components/Screen1';
 
-const App = () => (
-  <NativeBaseProvider>
-    <Box width="100%" padding={4} bg="primary" height="auto" minHeight="50px" />
-    <Button size="md" width={20} colorScheme="primary" variant="solid">
-      Buttonss
-    </Button>
-  </NativeBaseProvider>
-)
+const App = () => {
+  const {
+    yourParty,
+    connectedDevice,
+    requestPermissions,
+    scanForPeripherals,
+    connectToDevice,
+    allDevices,
+    billsPC,
+    exchangePokemon,
+  } = useBLE();
 
+  const scanForDevices = () => {
+    requestPermissions(isGranted => {
+      if (isGranted) {
+        scanForPeripherals();
+      }
+    });
+  };
 
-export default App
+  return (
+    <NativeBaseProvider>
+		<Box padding={2}>
+			<Screen1/>
+		</Box>
+	</NativeBaseProvider>
+  )
+
+};
+
+export default App;
