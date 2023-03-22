@@ -73,7 +73,7 @@ function useBLE() {
       setConnectedDevice(deviceConnection);
       await deviceConnection.discoverAllServicesAndCharacteristics();
       bleManager.stopDeviceScan();
-      console.log(device)
+      console.log(device);
       startStreamingData(deviceConnection);
     } catch (e) {
       console.log('FAILED TO CONNECT', e);
