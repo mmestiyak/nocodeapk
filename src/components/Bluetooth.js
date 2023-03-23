@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import Base64 from '../utils/common';
 
 import DeviceModal from './DeviceConnectionModal';
 import useBLE from './hooks/useBLE';
@@ -13,6 +14,10 @@ const Bluetooth = () => {
     allDevices,
     disconnectFromDevice,
   } = useBLE();
+
+  useEffect(() => {
+    console.log({fuck: Base64.btoa('fuck') === 'ZnVjaw=='});
+  }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
