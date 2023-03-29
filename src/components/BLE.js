@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import DeviceModal from './DeviceConnectionModal';
-import useBluetooth from './hooks/useBluetooth';
+import useBLE from './hooks/useBLE';
 
 const Bluetooth = () => {
   const {
@@ -12,7 +12,7 @@ const Bluetooth = () => {
     connectToDevice,
     allDevices,
     disconnectFromDevice,
-  } = useBluetooth();
+  } = useBLE();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -40,16 +40,6 @@ const Bluetooth = () => {
           <Text style={styles.heartRateTitleText}>Device connected</Text>
           <Pressable style={styles.ctaButton} onPress={disconnectFromDevice}>
             <Text style={styles.connectButton}>disconnect</Text>
-          </Pressable>
-          <Pressable
-            style={styles.ctaButton}
-            onPress={() => connectedDevice.write('1')}>
-            <Text style={styles.connectButton}>on</Text>
-          </Pressable>
-          <Pressable
-            style={styles.ctaButton}
-            onPress={() => connectedDevice.write('0')}>
-            <Text style={styles.connectButton}>off</Text>
           </Pressable>
         </>
       ) : (

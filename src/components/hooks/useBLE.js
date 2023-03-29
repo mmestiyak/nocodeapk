@@ -4,7 +4,8 @@ import {PermissionsAndroid, Platform} from 'react-native';
 import {BleManager, Device} from 'react-native-ble-plx';
 import DeviceInfo from 'react-native-device-info';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
-import { atob } from 'react-native-quick-base64';
+import {atob} from 'react-native-quick-base64';
+import Base64 from '../../utils/common';
 
 const bleManager = new BleManager();
 
@@ -107,13 +108,12 @@ function useBLE() {
         console.log(`characteristic error: ${err}`);
         console.log(JSON.stringify(err));
       } else {
-        console.log('ss')
-        console.log('Is Characteristics Readable:', update.isReadable);
-        // console.log('Heart Rate Data:', atob(update.value));
+        // console.log('ss');
+        // console.log('Is Characteristics Readable:', update.isReadable);
+        console.log('Heart Rate Data:', atob(update.value));
         // // const readCharacteristic = await device.readCharacteristicForService(userDataServiceUUID,
         //  heightCharacteristicUUID); // assuming the device is already connected
         // // var data = new Uint16Array(base64.decode(update.value));
-
         // const heartRateData = Buffer.from(update.value, 'base64').readUInt16LE(0);
         // console.log("Heart Beats:",heartRateData);
       }
@@ -134,11 +134,10 @@ function useBLE() {
       //   }
       // }
       // console.log(characteristicss, 'ss');
-      readData(device);
+      // readData(device);
 
+      // startStreamingData(device);
       bleManager.stopDeviceScan();
-      console.log(device);
-      startStreamingData(deviceConnection);
     } catch (e) {
       console.log('FAILED TO CONNECT', e);
     }
@@ -151,22 +150,32 @@ function useBLE() {
     }
   };
 
-  const startStreamingData = async device => {
-    if (device) {
-      console.log(device);
-      device.monitorCharacteristicForService(
-        '11964219-3381-45b9-b239-692f17ecb9fd',
-        '31983d37-32cd-4da8-9006-d2b4d8be31e8',
-        (err, char) => {
-          // const decoded = atob(char.value);
+  // const startStreamingData = async device => {
+  //   if (device) {
+  //     device.monitorCharacteristicForService(
+  //       '11964219-3381-45b9-b239-692f17ecb9fd',
+  //       '31983d37-32cd-4da8-9006-d2b4d8be31e8',
+  //       (err, char) => {
+  //         console.log(Base64.atob(char.value));
+  //       },
+  //     );
+  //   } else {
+  //     console.log('No Device Connected');
+  //   }
+  // };
 
-          console.log(decoded, 'ss');
-        },
-      );
-    } else {
-      console.log('No Device Connected');
-    }
-  };
+  // const startStreamingData = async device => {
+  //   if (device) {
+  //     const value = await device.writeCharacteristicWithResponseForService(
+  //       '11964219-3381-45b9-b239-692f17ecb9fd',
+  //       '31983d37-32cd-4da8-9006-d2b4d8be31e8',
+  //       Base64.btoa('ideeza is nice!'),
+  //     );
+  //     console.log({value});
+  //   } else {
+  //     console.log('No Device Connected');
+  //   }
+  // };
 
   return {
     scanForPeripherals,
