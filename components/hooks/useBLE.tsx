@@ -131,6 +131,8 @@ function useBLE() {
         (device.name?.includes("Bill's PC") ||
           device.localName?.includes("Bill's PC"))
       ) {
+        console.log(device, 'device..')
+        alert('got device')
         setAllDevices((prevState: Device[]) => {
           if (!isDuplicateDevice(prevState, device)) {
             return [...prevState, device];

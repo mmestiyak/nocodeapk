@@ -1,13 +1,12 @@
-import * as NativeBase from 'native-base';
-import React from 'react';
+import React, {memo} from 'react';
 import PreviewContainer from './PreviewContainer';
+import * as NativeBase from 'native-base';
 import WithChildrenPreviewContainer from './WithChildrenPreviewComponent';
 
 const ComponentPreview = ({
   componentName,
   index,
   component,
-  state,
   ...forwardedProps
 }) => {
   if (!component) {
@@ -25,14 +24,12 @@ const ComponentPreview = ({
     'Switch',
     'Input',
   ];
-
   const componentsWithChildren = ['Box'];
   if (simpleComponents.includes(type)) {
     return (
       <PreviewContainer
         index={index}
         component={component}
-        state={state}
         type={NativeBase[type]}
         {...forwardedProps}
       />

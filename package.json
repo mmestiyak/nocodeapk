@@ -7,21 +7,21 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "debug-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && cd android && ./gradlew assembleDebug && cd ..",
+    "release-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/ && rm -rf android/app/src/main/res/drawable-* && rm -rf android/app/src/main/res/raw/* && cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "immer": "^9.0.16",
     "native-base": "3.4.0",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-ble-manager": "^8.4.4",
-    "react-native-ble-plx": "^2.0.3",
-    "react-native-device-info": "^10.3.0",
-    "react-native-permissions": "^3.6.1",
-    "react-native-quick-base64": "^2.0.5",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-svg": "^12.1.1",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "react-native-bluetooth-classic": "^1.60.0-rc.25",
+    "react-native-device-info": "^10.3.0",
+    "react-native-permissions": "^3.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

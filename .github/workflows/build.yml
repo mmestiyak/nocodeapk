@@ -2,7 +2,7 @@ name: react-native-android-build-apk
 on:
   push:
     branches:
-      - master
+      - '**'
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
@@ -10,23 +10,44 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install npm dependencies
         run: |
-          npm install
+          npm install -f
   build-android:
     needs: install-and-test
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps: 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Install npm dependencies
         run: |
-          npm install
+          npm install -f
       - name: Build Android Release
         run: |
-          cd android && ./gradlew assembleRelease
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+          mkdir zipfile
+          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/ && rm -rf android/app/src/main/res/drawable-* && rm -rf android/app/src/main/res/raw/* && cd android && ./gradlew assembleRelease && cd ..
+          mv android/app/build/outputs/apk/release/app-release.apk android/app/build/outputs/apk/release/app-${GITHUB_REF##*/}.apk
+          #cd zipfile && zip ${GITHUB_REF##*/}.zip  android/app/build/outputs/apk/release/app-${GITHUB_REF##*/}.apk && cd ..
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: app-release.apk
+#           path: android/app/build/outputs/apk/release/
+
+      - uses: LanceMcCarthy/Action-AzureBlobUpload@v2
+        name: Uploading to Azure storage...
         with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+          connection_string: ${{ secrets.YourAzureBlobConnectionString }}
+          container_name: apkstorage
+          source_folder: android/app/build/outputs/apk/release/
+          #source_folder: zipfile/
+       
+      # - uses: act10ns/slack@v1
+      #   name: Slack Notification
+      #   with: 
+      #     status: ${{ job.status }}
+      #     channel: '#general'
+      #     message: Uploaded app-${GITHUB_REF##*/} file Successfully
+  

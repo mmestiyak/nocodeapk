@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Box, Pressable} from 'native-base';
 
 const PreviewContainer = ({
@@ -6,13 +6,10 @@ const PreviewContainer = ({
   index,
   type,
   isBoxWrapped,
-  state,
   wrapPressable = false,
-  ...forwardedProps
 }) => {
   const propsElement = {
     ...component.props,
-    onPress: component.props.onPress?.bind(state),
     type: component.id,
   };
   const children = React.createElement(type, propsElement);
@@ -26,6 +23,7 @@ const PreviewContainer = ({
   if (wrapPressable) {
     return <Pressable>{children}</Pressable>;
   }
+
   return children;
 };
 
