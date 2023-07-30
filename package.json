@@ -12,16 +12,18 @@
     "release-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/ && rm -rf android/app/src/main/res/drawable-* && rm -rf android/app/src/main/res/raw/* && cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
     "immer": "^9.0.16",
     "native-base": "3.4.0",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-safe-area-context": "^3.2.0",
-    "react-native-svg": "^12.1.1",
-    "react-redux": "^8.0.5",
     "react-native-bluetooth-classic": "^1.60.0-rc.25",
     "react-native-device-info": "^10.3.0",
-    "react-native-permissions": "^3.6.1"
+    "react-native-permissions": "^3.6.1",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-svg": "^12.1.1",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
